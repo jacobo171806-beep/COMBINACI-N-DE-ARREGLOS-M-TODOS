@@ -1,0 +1,87 @@
+COMBINACIÓN DE ARREGLOS + MÉTODOS
+
+Nombre: Jacobo Pérez Iregui
+Grado: 10 ª B
+
+
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+void LlenarVector(int[], int, string);
+void RealizarConteo(int[], string, int);
+void ImprimirReporte(int, int, int, string, int);
+void CrearVector(string, int);
+void MenuPrincipal();
+
+int main() {
+    MenuPrincipal();
+    return 0;
+}
+
+void MenuPrincipal() {
+    int opc;
+    do {
+        cout << "\n================================" << endl;
+        cout << "== M E N U P R I N C I P A L ==" << endl;
+        cout << "== 1- Elegir ESTADOS UNIDOS ==" << endl;
+        cout << "== 2- Elegir CHINA ==" << endl;
+        cout << "== 3- Elegir JAPON ==" << endl;
+        cout << "== 4- Elegir COLOMBIA ==" << endl;
+        cout << "== 5- Elegir GRAN BRETANA ==" << endl;
+        cout << "== 6- Elegir VENEZUELA ==" << endl;
+        cout << "== 7- Elegir MEXICO ==" << endl;
+        cout << "== 8- Elegir ECUADOR ==" << endl;
+        cout << "== 9- Salir del programa ==" << endl;
+        cout << "==> Digite su opcion: ";
+        cin >> opc;
+        switch (opc) {
+            case 1: CrearVector("EEUU", 50); break;
+            case 2: CrearVector("CHINA", 48); break;
+            case 3: CrearVector("JAPON", 33); break;
+            case 4: CrearVector("COLOMBIA", 14); break;
+            case 5: CrearVector("GRAN BRETANA", 60); break;
+            case 6: CrearVector("VENEZUELA", 20); break;
+            case 7: CrearVector("MEXICO", 32); break;
+            case 8: CrearVector("ECUADOR", 10); break;
+        }
+    } while (opc != 9);
+}
+
+void CrearVector(string pais, int pruebas) {
+    int* tipoMedalla = new int[pruebas];
+    LlenarVector(tipoMedalla, pruebas, pais);
+}
+
+void LlenarVector(int tipo[], int pruebas, string pais) {
+    srand(time(NULL));
+    for (int i = 0; i < pruebas; i++) {
+        tipo[i] = rand() % 4;
+    }
+    RealizarConteo(tipo, pais, pruebas);
+}
+
+void RealizarConteo(int tipo[], string pais, int pruebas) {
+    int oros = 0, platas = 0, bronces = 0;
+    for (int i = 0; i < pruebas; i++) {
+        switch (tipo[i]) {
+            case 1: oros++; break;
+            case 2: platas++; break;
+            case 3: bronces++; break;
+        }
+    }
+    ImprimirReporte(oros, platas, bronces, pais, pruebas);
+}
+
+void ImprimirReporte(int oro, int pl, int br, string pais, int pruebas) {
+    cout << "\n================================" << endl;
+    cout << "Juegos olimpicos de Tokio" << endl;
+    cout << "Year: 2020" << endl;
+    cout << "Pais: " << pais << endl;
+    cout << "Resultado Total Medallero:" << endl;
+    cout << "Oros Platas Bronces Total" << endl;
+    cout << " " << oro << " " << pl << " " << br << " " << (oro + pl + br) << endl;
+    cout << "Total Pruebas: " << pruebas << endl;
+    cout << "================================" << endl;
+}
